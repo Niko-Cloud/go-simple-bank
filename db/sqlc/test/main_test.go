@@ -5,11 +5,13 @@ import (
 	_ "github.com/lib/pq"
 	"log"
 	"os"
-	"simplebank/app/db/sqlc/gen"
+	_ "simplebank/app/db/sqlc/gen"
+	db "simplebank/app/db/sqlc/gen"
 	"testing"
 )
 
 var testQueries *db.Queries
+var testDB *sql.DB
 
 const (
 	dbDriver = "postgres"
@@ -17,12 +19,14 @@ const (
 )
 
 func TestMain(m *testing.M) {
-	conn, err := sql.Open(dbDriver, dbSource)
+	var err error
+
+	testDB, err = sql.Open(dbDriver, dbSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
 
-	testQueries = db.New(conn)
+	testQueries = db.New(testDB)
 
 	os.Exit(m.Run())
 }

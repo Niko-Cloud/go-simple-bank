@@ -8,6 +8,7 @@ import (
 
 type Store interface {
 	Querier
+	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResults, error)
 }
 
 // Store provides all functions to execute db queries and transactions
@@ -17,7 +18,7 @@ type StoreSQL struct {
 }
 
 // NewStore creates a new Store instance
-func NewStore(d *sql.DB) *StoreSQL {
+func NewStore(d *sql.DB) Store {
 	return &StoreSQL{
 		Queries: New(d),
 		db:      d,

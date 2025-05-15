@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"github.com/stretchr/testify/require"
-	"simplebank/app/db/sqlc/gen"
-	"simplebank/app/db/util"
+	"github.com/yuki/simplebank/db/sqlc/gen"
+	"github.com/yuki/simplebank/db/util"
 	"testing"
 	"time"
 

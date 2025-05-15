@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/stretchr/testify/require"
-	db "simplebank/app/db/sqlc/gen"
+	db "github.com/yuki/simplebank/db/sqlc/gen"
 	"testing"
 )
 

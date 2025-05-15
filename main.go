@@ -3,21 +3,20 @@ package main
 import (
 	"database/sql"
 	_ "github.com/lib/pq"
+	"github.com/yuki/simplebank/api"
+	db "github.com/yuki/simplebank/db/sqlc/gen"
+	"github.com/yuki/simplebank/db/util"
 	"log"
-	"simplebank/app/api"
-	db "simplebank/app/db/sqlc/gen"
-	"simplebank/app/db/util"
 )
 
 func main() {
 	config, err := util.LoadConfig(".")
 	if err != nil {
-		log.Fatal("Cannot load config:", err)
+		log.Fatal(err)
 	}
 
 	conn, err := sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
-
 		log.Fatal("cannot connect to db:", err)
 	}
 

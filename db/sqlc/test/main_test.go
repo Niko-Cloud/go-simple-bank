@@ -3,11 +3,11 @@ package test
 import (
 	"database/sql"
 	_ "github.com/lib/pq"
+	_ "github.com/yuki/simplebank/db/sqlc/gen"
+	db "github.com/yuki/simplebank/db/sqlc/gen"
+	"github.com/yuki/simplebank/db/util"
 	"log"
 	"os"
-	_ "simplebank/app/db/sqlc/gen"
-	db "simplebank/app/db/sqlc/gen"
-	"simplebank/app/db/util"
 	"testing"
 )
 

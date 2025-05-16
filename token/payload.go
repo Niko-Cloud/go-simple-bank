@@ -20,6 +20,13 @@ type Payload struct {
 	ExpiresAt time.Time `json:"expires_at"`
 }
 
+func (payload *Payload) Valid() error {
+	if time.Now().After(payload.ExpiresAt) {
+		return ErrExpiredToken
+	}
+	return nil
+}
+
 func (payload *Payload) GetExpirationTime() (*jwt.NumericDate, error) {
 	return jwt.NewNumericDate(payload.ExpiresAt), nil
 }

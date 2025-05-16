@@ -24,10 +24,16 @@ func NewServer(store db.Store) *Server {
 	}
 
 	// add routes to router
+	// Accounts
 	router.POST("/accounts", server.createAccount)
 	router.GET("/accounts/:id", server.getAccount)
 	router.GET("/accounts", server.listAccounts)
+
+	// Transfers
 	router.POST("/transfers", server.createTransfer)
+
+	// Users
+	router.POST("/users", server.createUser)
 
 	server.router = router
 	return server

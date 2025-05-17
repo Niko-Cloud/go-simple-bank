@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 	mockdb "github.com/yuki/simplebank/db/mock"
 	db "github.com/yuki/simplebank/db/sqlc/gen"
-	"github.com/yuki/simplebank/db/util"
+	"github.com/yuki/simplebank/util"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -88,7 +88,7 @@ func TestGetAccountAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start test server and send request
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			url := fmt.Sprintf("/accounts/%d", tc.accountID)

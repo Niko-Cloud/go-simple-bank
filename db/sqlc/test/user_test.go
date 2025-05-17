@@ -4,20 +4,20 @@ import (
 	"context"
 	"github.com/stretchr/testify/require"
 	db "github.com/yuki/simplebank/db/sqlc/gen"
-	"github.com/yuki/simplebank/db/util"
+	util2 "github.com/yuki/simplebank/util"
 	"testing"
 	"time"
 )
 
 func createRandomUser(t *testing.T) db.User {
-	hashedPassword, err := util.HashPassword(util.RandomString(6))
+	hashedPassword, err := util2.HashPassword(util2.RandomString(6))
 	require.NoError(t, err)
 
 	arg := db.CreateUserParams{
-		Username:       util.RandomOwner(),
+		Username:       util2.RandomOwner(),
 		HashedPassword: hashedPassword,
-		FullName:       util.RandomOwner(),
-		Email:          util.RandomEmail(),
+		FullName:       util2.RandomOwner(),
+		Email:          util2.RandomEmail(),
 	}
 
 	user, err := testQueries.CreateUser(context.Background(), arg)

@@ -5,7 +5,7 @@ import (
 	_ "github.com/lib/pq"
 	_ "github.com/yuki/simplebank/db/sqlc/gen"
 	db "github.com/yuki/simplebank/db/sqlc/gen"
-	"github.com/yuki/simplebank/db/util"
+	"github.com/yuki/simplebank/util"
 	"log"
 	"os"
 	"testing"

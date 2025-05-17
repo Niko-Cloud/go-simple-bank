@@ -2,7 +2,7 @@ package token
 
 import (
 	"github.com/stretchr/testify/require"
-	"github.com/yuki/simplebank/db/util"
+	"github.com/yuki/simplebank/util"
 	"testing"
 	"time"
 )

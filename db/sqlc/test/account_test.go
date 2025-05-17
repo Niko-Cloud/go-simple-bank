@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"github.com/stretchr/testify/require"
 	"github.com/yuki/simplebank/db/sqlc/gen"
-	"github.com/yuki/simplebank/db/util"
+	"github.com/yuki/simplebank/util"
 	"testing"
 	"time"
 

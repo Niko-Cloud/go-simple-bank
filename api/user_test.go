@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 	mockdb "github.com/yuki/simplebank/db/mock"
 	db "github.com/yuki/simplebank/db/sqlc/gen"
-	"github.com/yuki/simplebank/db/util"
+	util2 "github.com/yuki/simplebank/util"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -30,7 +30,7 @@ func (e eqCreateUserParamsMatcher) Matches(x interface{}) bool {
 		return false
 	}
 
-	err := util.CheckHashedPassword(e.password, arg.HashedPassword)
+	err := util2.CheckHashedPassword(e.password, arg.HashedPassword)
 	if err != nil {
 		return false
 	}
@@ -178,7 +178,7 @@ func TestCreateUserAPI(t *testing.T) {
 			store := mockdb.NewMockStore(ctrl)
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			// Marshal body data to JSON
@@ -197,15 +197,15 @@ func TestCreateUserAPI(t *testing.T) {
 }
 
 func randomUser(t *testing.T) (user db.User, password string) {
-	password = util.RandomString(6)
-	hashedPassword, err := util.HashPassword(password)
+	password = util2.RandomString(6)
+	hashedPassword, err := util2.HashPassword(password)
 	require.NoError(t, err)
 
 	user = db.User{
-		Username:       util.RandomOwner(),
+		Username:       util2.RandomOwner(),
 		HashedPassword: hashedPassword,
-		FullName:       util.RandomOwner(),
-		Email:          util.RandomEmail(),
+		FullName:       util2.RandomOwner(),
+		Email:          util2.RandomEmail(),
 	}
 	return
 }

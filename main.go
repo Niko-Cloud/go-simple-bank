@@ -5,7 +5,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/yuki/simplebank/api"
 	db "github.com/yuki/simplebank/db/sqlc/gen"
-	"github.com/yuki/simplebank/db/util"
+	"github.com/yuki/simplebank/util"
 	"log"
 )
 
@@ -21,7 +21,10 @@ func main() {
 	}
 
 	store := db.NewStore(conn)
-	server := api.NewServer(store)
+	server, err := api.NewServer(config, store)
+	if err != nil {
+		log.Fatalf("cannot create server: %v", err)
+	}
 
 	err = server.Start(config.ServerAddress)
 	if err != nil {
